@@ -36,7 +36,7 @@ function handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage
     fastPassDate,
   };
 
-  axios.post('/api/submitEmail', { user }).then(res => {
+  axios.post('https://disney-reminders-backend.herokuapp.com/api/submitEmail', { user }).then(res => {
     setValidationMessage(res.data);
   });
 }
