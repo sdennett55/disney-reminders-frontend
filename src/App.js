@@ -12,6 +12,8 @@ import {
 import DateFnsUtils from '@date-io/date-fns';
 import './App.css';
 
+const api = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://disney-reminders-backend.herokuapp.com';
+
 const theme = createMuiTheme({
   palette: {
     primary: { main: '#0093c4' },
@@ -34,9 +36,12 @@ function handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage
     email,
     diningDate,
     fastPassDate,
+    localTime: getTime(diningDate),
+    localDiningDate: getFormattedDate(diningDate),
+    localFastPassDate: getFormattedDate(fastPassDate),
   };
 
-  axios.post('https://disney-reminders-backend.herokuapp.com/api/submitEmail', { user }).then(res => {
+  axios.post(`${api}/api/submitEmail`, { user }).then(res => {
     setValidationMessage(res.data);
   });
 }
@@ -47,7 +52,7 @@ function handleDateChange({ value, setSelectedDate, daysToFastPass, setDiningDat
   }
 
   const date = new Date(value);
-  date.setHours(6, 0, 0, 0);
+  date.setHours(7, 0, 0, 0);
   
   setSelectedDate(date);
 
@@ -104,7 +109,7 @@ function App() {
           </>
         ) : (
           <>
-            <h1 className="App-title">Get email reminders for your next Walt Disney World vacation!</h1>
+            <h1 className="App-title">Get reminders to book your Dining and FastPass Reservations!</h1>
             <form onSubmit={e => handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage, daysToFastPass })}>
               <Box mt={1} mb={1}>
                 <TextField helperText={validationMessage && validationMessage.toLowerCase().includes('email') && validationMessage} error={Boolean(validationMessage) && validationMessage.toLowerCase().includes('email')} fullWidth label="Email" type="email" required onChange={e => setEmail(e.target.value)} />
