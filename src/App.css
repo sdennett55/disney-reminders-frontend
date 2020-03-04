@@ -14,6 +14,7 @@ body {
   margin-top: 0;
   max-width: 540px;
   color: #0093c4;
+  line-height: 1.25;
 }
 @media (max-width: 450px) {
   .App-resultLine {
