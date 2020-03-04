@@ -18,6 +18,13 @@ const theme = createMuiTheme({
   palette: {
     primary: { main: '#0093c4' },
   },
+  typography: {
+    fontFamily: [
+      'Alata',
+      'Helvetica',
+      'sans-serif'
+    ].join(','),
+  }
 });
 
 const DAYS_TO_DINING = 180;
