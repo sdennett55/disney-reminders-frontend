@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
-import { Box, Button, Checkbox, FormLabel, Link, TextField, Popover, IconButton } from '@material-ui/core';
+import { Box, Button, Checkbox, CircularProgress, FormLabel, Link, TextField, Popover, IconButton } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -29,8 +29,10 @@ const getDate = ({ date, numOfDays }) => {
   return new Date(tempDate.setDate(tempDate.getDate() - numOfDays));
 }
 
-function handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage }) {
+function handleSubmit({ e, email, setIsLoading, diningDate, fastPassDate, setValidationMessage }) {
   e.preventDefault();
+
+  setIsLoading(true);
 
   const user = {
     email,
@@ -42,6 +44,7 @@ function handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage
   };
 
   axios.post(`${api}/api/submitEmail`, { user }).then(res => {
+    setIsLoading(false);
     setValidationMessage(res.data);
   });
 }
@@ -95,6 +98,7 @@ function App() {
   const [isDisneyProperty, setIsDisneyProperty] = useState(true);
   const [validationMessage, setValidationMessage] = useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
   const daysToFastPass = isDisneyProperty ? DAYS_TO_FASTPASS_ON_PROPERTY : DAYS_TO_FASTPASS;
 
   return (
@@ -110,7 +114,7 @@ function App() {
         ) : (
           <>
             <h1 className="App-title">Get reminders to book your Dining and FastPass Reservations!</h1>
-            <form onSubmit={e => handleSubmit({ e, email, diningDate, fastPassDate, setValidationMessage, daysToFastPass })}>
+            <form onSubmit={e => handleSubmit({ e, email, setIsLoading, diningDate, fastPassDate, setValidationMessage, daysToFastPass })}>
               <Box mt={1} mb={1}>
                 <TextField helperText={validationMessage && validationMessage.toLowerCase().includes('email') && validationMessage} error={Boolean(validationMessage) && validationMessage.toLowerCase().includes('email')} fullWidth label="Email" type="email" required onChange={e => setEmail(e.target.value)} />
               </Box>
@@ -134,7 +138,10 @@ function App() {
                 </Popover>
               </Box>
               <Box display="flex" justifyContent="center" mt={1} mb={1}>
-                <Button variant="contained" color="primary" type="submit">Remind Me!</Button>
+                <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
+                  {isLoading ? 'Sending...' : 'Remind Me!'}
+                  {isLoading && <span style={{position: 'relative', top: '2px'}}><Box ml={1} component="span"><CircularProgress size={14} color="secondary" /></Box></span>}
+                </Button>
               </Box>
             </form>
             <Box className="App-resultLine" mt={4} mb={2}>
