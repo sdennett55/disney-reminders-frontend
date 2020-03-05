@@ -10,6 +10,8 @@ import {
   DatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import momentTz from 'moment-timezone';
+import moment from 'moment';
 import './App.css';
 
 const api = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://disney-reminders-backend.herokuapp.com';
@@ -32,8 +34,7 @@ const DAYS_TO_FASTPASS = 30;
 const DAYS_TO_FASTPASS_ON_PROPERTY = 60;
 
 const getDate = ({ date, numOfDays }) => {
-  var tempDate = new Date(date);
-  return new Date(tempDate.setDate(tempDate.getDate() - numOfDays));
+  return moment(date).subtract(numOfDays, 'd').format();
 }
 
 function handleSubmit({ e, email, setIsLoading, diningDate, fastPassDate, setValidationMessage }) {
@@ -61,33 +62,35 @@ function handleDateChange({ value, setSelectedDate, daysToFastPass, setDiningDat
     return;
   }
 
-  const date = new Date(value);
-  date.setHours(7, 0, 0, 0);
+  // we get the date (value) from the datepicker
+  // we convert the date to UTC time
+  const date = momentTz(value)
+    .utc()
+    .hours(12)
+    .minutes(0)
+    .seconds(0)
+    .format();
   
+  // use the above to set the new datepicker date
   setSelectedDate(date);
 
+  // create the diningDate and fastPassDate that we pass to the server
+  // this subtracts X # of days from the datepicker date
   setDiningDate(getDate({ date, numOfDays: DAYS_TO_DINING }));
   setFastPassDate(getDate({ date, numOfDays: daysToFastPass }));
 }
 
 function getTime(date) {
-  return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}).replace(/^0+/, '');
+  return momentTz(date).local().format("h:mm A");
 }
 
 function getFormattedDate(date) {
-  return date.toLocaleDateString();
-}
-
-function getMinDate(daysToFastPass) {
-  const MIN_NUM_OF_DAYS = daysToFastPass ? daysToFastPass : DAYS_TO_FASTPASS;
-  var today = new Date();
-  return new Date(today.setDate(today.getDate() + MIN_NUM_OF_DAYS)).toISOString().split('T')[0];
+  return momentTz(date).local().format('L');
 }
 
 function getDateInfo({date, type}) {
   const href = type === 'dining' ? 'https://disneyworld.disney.go.com/dining' : 'https://disneyworld.disney.go.com/fastpass-plus/select-party/';
-
-  if (new Date() > date) {
+  if (moment().format() > date) {
     return (
       <>
         You can <Link target="_blank" color="secondary" href={href}>make these reservations today!</Link>
