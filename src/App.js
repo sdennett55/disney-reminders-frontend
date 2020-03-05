@@ -81,10 +81,7 @@ function handleDateChange({ value, setSelectedDate, daysToFastPass, setDiningDat
 }
 
 function getTime(date) {
-  if (!moment(date).local().isDST()) {
-    return momentTz(date).subtract(1, 'h').local().format("h:mm A");
-  }
-  return momentTz(date).local().format("h:mm A");
+  return '7:00am EST';
 }
 
 function getFormattedDate(date) {
