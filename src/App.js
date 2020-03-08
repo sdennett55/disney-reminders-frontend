@@ -47,6 +47,7 @@ const getDate = ({ date, numOfDays }) => {
 function handleSubmit({
   e,
   email,
+  phone,
   setIsLoading,
   diningDate,
   fastPassDate,
@@ -62,7 +63,8 @@ function handleSubmit({
     fastPassDate,
     localTime: getTime(diningDate),
     localDiningDate: getFormattedDate(diningDate),
-    localFastPassDate: getFormattedDate(fastPassDate)
+    localFastPassDate: getFormattedDate(fastPassDate),
+    phone,
   };
 
   axios.post(`${api}/api/submitEmail`, { user }).then(res => {
@@ -199,6 +201,7 @@ function App() {
                   handleSubmit({
                     e,
                     email,
+                    phone,
                     setIsLoading,
                     diningDate,
                     fastPassDate,
