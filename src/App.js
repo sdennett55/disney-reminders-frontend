@@ -11,6 +11,7 @@ import {
   Popover,
   IconButton
 } from "@material-ui/core";
+import MuiPhoneNumber from 'material-ui-phone-number';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import InfoIcon from "@material-ui/icons/Info";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -64,7 +65,7 @@ function handleSubmit({
     localTime: getTime(diningDate),
     localDiningDate: getFormattedDate(diningDate),
     localFastPassDate: getFormattedDate(fastPassDate),
-    phone,
+    phone: phone.replace(/[^0-9]/g, ''),
   };
 
   axios.post(`${api}/api/submitEmail`, { user }).then(res => {
@@ -260,7 +261,8 @@ function App() {
                   />
                 </Box>
                 <Box mt={2} mb={2}>
-                  <TextField
+                  <MuiPhoneNumber
+                    defaultCountry={'us'}
                     helperText={
                       validationMessage &&
                       validationMessage.toLowerCase().includes("phone") &&
@@ -273,7 +275,7 @@ function App() {
                     fullWidth
                     label="Phone for Texting (Optional)"
                     type="tel"
-                    onChange={e => setPhone(e.target.value)}
+                    onChange={value => setPhone(value)}
                   />
                 </Box>
                 <Box display="flex" alignItems="center" mt={2} mb={2}>
