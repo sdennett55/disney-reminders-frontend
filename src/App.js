@@ -19,6 +19,7 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import momentTz from "moment-timezone";
 import moment from "moment";
+
 import "./App.css";
 
 const api =
@@ -273,7 +274,7 @@ function App() {
                       validationMessage.toLowerCase().includes("phone")
                     }
                     fullWidth
-                    label="Phone for Texting (Optional)"
+                    label="Receive a Text (Optional)"
                     type="tel"
                     onChange={value => setPhone(value)}
                   />
