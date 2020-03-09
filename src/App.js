@@ -158,6 +158,7 @@ function App() {
   const daysToFastPass = isDisneyProperty
     ? DAYS_TO_FASTPASS_ON_PROPERTY
     : DAYS_TO_FASTPASS;
+  const successTitle = phone ? 'Thank you! We\'ve sent you a confirmation email and text.' : 'Thank you! We\'ve sent you a confirmation email.'
 
   return (
     <ThemeProvider theme={theme}>
@@ -180,7 +181,7 @@ function App() {
           {validationMessage === "Success!" ? (
             <>
               <h1 className="App-title">
-                Thank you! We've sent you a confirmation email.
+                {successTitle}
               </h1>
               <Button
                 variant="contained"
