@@ -11,7 +11,7 @@ import {
   Popover,
   IconButton
 } from "@material-ui/core";
-import MuiPhoneNumber from 'material-ui-phone-number';
+import ReactPhoneInput from 'react-phone-input-mui';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import InfoIcon from "@material-ui/icons/Info";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,6 +19,7 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import momentTz from "moment-timezone";
 import moment from "moment";
+import 'react-phone-input-mui/dist/style.css'
 
 import "./App.css";
 
@@ -263,20 +264,18 @@ function App() {
                   />
                 </Box>
                 <Box mt={2} mb={2}>
-                  <MuiPhoneNumber
-                    defaultCountry={'us'}
-                    helperText={
-                      validationMessage &&
-                      validationMessage.toLowerCase().includes("phone") &&
-                      validationMessage
-                    }
-                    error={
-                      Boolean(validationMessage) &&
+                  <ReactPhoneInput
+                    value={phone}
+                    component={TextField}
+                    defaultCountry="us"
+                    inputExtraProps={{
+                      helperText: validationMessage &&
+                        validationMessage.toLowerCase().includes("phone") &&
+                        validationMessage,
+                      error: Boolean(validationMessage) &&
                       validationMessage.toLowerCase().includes("phone")
-                    }
-                    fullWidth
+                    }}
                     label="Receive a Text (Optional)"
-                    type="tel"
                     onChange={value => setPhone(value)}
                   />
                 </Box>

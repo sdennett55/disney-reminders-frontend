@@ -22,3 +22,8 @@ body {
     width: 100%;
   }
 }
+
+.react-tel-input .flag-dropdown {
+  top: 19px;
+  bottom: auto;
+}
