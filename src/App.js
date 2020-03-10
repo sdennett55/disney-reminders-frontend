@@ -273,9 +273,9 @@ function App() {
                         validationMessage.toLowerCase().includes("phone") &&
                         validationMessage,
                       error: Boolean(validationMessage) &&
-                      validationMessage.toLowerCase().includes("phone")
+                      validationMessage.toLowerCase().includes("phone"),
+                      label: 'Receive a Text (Optional)'
                     }}
-                    label="Receive a Text (Optional)"
                     onChange={value => setPhone(value)}
                   />
                 </Box>
@@ -346,6 +346,9 @@ function App() {
                 {fastPassDate &&
                   getDateInfo({ date: fastPassDate, type: "fastPass" })}
               </div>
+              <Box component="small" mt={4}>
+                Sponsored by: <Link href="https://waitupgame.com">Wait Up!</Link>
+              </Box>
             </>
           )}
         </Box>
