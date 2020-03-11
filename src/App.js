@@ -267,7 +267,6 @@ function App() {
                   <ReactPhoneInput
                     value={phone}
                     component={TextField}
-                    defaultCountry="us"
                     inputExtraProps={{
                       helperText: validationMessage &&
                         validationMessage.toLowerCase().includes("phone") &&
