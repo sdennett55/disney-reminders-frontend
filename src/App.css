@@ -27,3 +27,6 @@ body {
   top: 35px;
   bottom: auto;
 }
+.flag.undefined .arrow {
+  opacity: 0;
+}
