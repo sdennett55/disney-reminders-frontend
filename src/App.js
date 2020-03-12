@@ -19,8 +19,6 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import momentTz from "moment-timezone";
 import moment from "moment";
-import 'react-phone-input-mui/dist/style.css'
-
 import "./App.css";
 
 const api =
