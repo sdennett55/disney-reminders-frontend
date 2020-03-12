@@ -285,9 +285,11 @@ function App() {
                     checked={isDisneyProperty}
                     onChange={e => setIsDisneyProperty(!isDisneyProperty)}
                   />
-                  <FormLabel htmlFor="isDisneyProperty" size="small">
-                    I am staying on Disney property
-                  </FormLabel>
+                  <Box ml={1} mr={1}>
+                    <FormLabel htmlFor="isDisneyProperty" size="small">
+                      I am staying on Disney property
+                    </FormLabel>
+                  </Box>
                   <IconButton
                     onClick={e => {
                       setAnchorEl(e.currentTarget);
