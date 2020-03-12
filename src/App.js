@@ -240,17 +240,11 @@ function App() {
                           setFastPassDate
                         })
                       }
-                      InputLabelProps={{
-                        style: {color: 'inherit'},
-                      }}
                     />
                   </MuiPickersUtilsProvider>
                 </Box>
                 <Box mt={2} mb={2}>
                   <TextField
-                    InputLabelProps={{
-                      style: {color: 'inherit'},
-                    }}
                     helperText={
                       validationMessage &&
                       validationMessage.toLowerCase().includes("email") &&
@@ -279,8 +273,7 @@ function App() {
                       error: Boolean(validationMessage) &&
                       validationMessage.toLowerCase().includes("phone"),
                       label: 'Receive a Text (Optional)',
-                      id: 'Phone',
-                      InputLabelProps: {style: {color: 'inherit'}},
+                      id: 'Phone'
                     }}
                     onChange={value => setPhone(value)}
                   />
@@ -293,7 +286,7 @@ function App() {
                     onChange={e => setIsDisneyProperty(!isDisneyProperty)}
                   />
                   <Box ml={1} mr={1}>
-                    <FormLabel htmlFor="isDisneyProperty" size="small" style={{color: 'inherit'}}>
+                    <FormLabel htmlFor="isDisneyProperty" size="small">
                       I am staying on Disney property
                     </FormLabel>
                   </Box>
