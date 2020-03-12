@@ -19,7 +19,6 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import momentTz from "moment-timezone";
 import moment from "moment";
-import "./App.css";
 
 const api =
   process.env.NODE_ENV === "development"
