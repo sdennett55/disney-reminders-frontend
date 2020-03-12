@@ -17,6 +17,10 @@ body {
   color: #0093c4;
   line-height: 1.25;
 }
+.App-loadingIcon {
+  position: relative;
+  top: 2px;
+}
 @media (max-width: 450px) {
   .App-resultLine {
     width: 100%;

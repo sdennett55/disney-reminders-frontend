@@ -292,6 +292,7 @@ function App() {
                     onClick={e => {
                       setAnchorEl(e.currentTarget);
                     }}
+                    aria-label="See more info on Disney Properties"
                   >
                     <InfoIcon />
                   </IconButton>
@@ -326,7 +327,7 @@ function App() {
                   >
                     {isLoading ? "Sending..." : "Remind Me!"}
                     {isLoading && (
-                      <span style={{ position: "relative", top: "2px" }}>
+                      <span className="App-loadingIcon">
                         <Box ml={1} component="span">
                           <CircularProgress size={14} color="secondary" />
                         </Box>
