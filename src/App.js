@@ -217,6 +217,7 @@ function App() {
                 <Box mt={1} mb={1}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
+                      id="datePicker"
                       helperText={
                         validationMessage &&
                         validationMessage.toLowerCase().includes("date") &&
@@ -259,6 +260,7 @@ function App() {
                     fullWidth
                     label="Email"
                     type="email"
+                    id="Email"
                     required
                     onChange={e => setEmail(e.target.value)}
                   />
@@ -273,7 +275,8 @@ function App() {
                         validationMessage,
                       error: Boolean(validationMessage) &&
                       validationMessage.toLowerCase().includes("phone"),
-                      label: 'Receive a Text (Optional)'
+                      label: 'Receive a Text (Optional)',
+                      id: 'Phone'
                     }}
                     onChange={value => setPhone(value)}
                   />
