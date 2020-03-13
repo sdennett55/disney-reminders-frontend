@@ -127,7 +127,7 @@ function getDateInfo({ date, type }) {
       </>
     )
   }
-  return `${getFormattedDate(date)} at ${getTime(type)}`;
+  return <span className="App-dateTime">{getFormattedDate(date)} at {getTime(type)}</span>;
 }
 
 function isValidEmail(email) {
