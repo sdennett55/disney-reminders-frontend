@@ -21,11 +21,6 @@ body {
   position: relative;
   top: 2px;
 }
-@media (max-width: 450px) {
-  .App-resultLine {
-    width: 100%;
-  }
-}
 
 .react-tel-input .flag-dropdown {
   top: 35px;

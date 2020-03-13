@@ -125,13 +125,9 @@ function getDateInfo({ date, type }) {
           make these reservations today!
         </Link>
       </>
-    );
+    )
   }
-  return (
-    <strong>
-      {getFormattedDate(date)} at {getTime(date)}
-    </strong>
-  );
+  return `${getFormattedDate(date)} at ${getTime(date)}`;
 }
 
 function isValidEmail(email) {
@@ -338,17 +334,23 @@ function App() {
                   </Button>
                 </Box>
               </form>
-              <Box className="App-resultLine" mt={4} mb={2}>
+              <Box className="App-resultLine" mt={3} mb={2}>
                 ADR Reservations ({DAYS_TO_DINING} Days out):{" "}
-                {diningDate &&
-                  getDateInfo({ date: diningDate, type: "dining" })}
+                {diningDate && (
+                  <strong className="App-dateResult">
+                    {getDateInfo({ date: diningDate, type: "dining" })}
+                  </strong>
+                )}
               </Box>
               <div className="App-resultLine">
                 FP+ Reservations ({daysToFastPass} Days out):{" "}
-                {fastPassDate &&
-                  getDateInfo({ date: fastPassDate, type: "fastPass" })}
+                {fastPassDate && (
+                  <strong className="App-dateResult">
+                    {getDateInfo({ date: fastPassDate, type: "fastPass" })}
+                  </strong>
+                )}
               </div>
-              <Box component="small" mt={4}>
+              <Box component="small" mt={3}>
                 Sponsored by: <Link href="https://waitupgame.com">Wait Up!</Link>
               </Box>
             </>
