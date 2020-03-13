@@ -102,8 +102,8 @@ function handleDateChange({
   setFastPassDate(getDate({ date, numOfDays: daysToFastPass }));
 }
 
-function getTime(date) {
-  return "7:00am EST";
+function getTime(type) {
+  return type === 'dining' ? '6:00am EST' : '7:00am EST';
 }
 
 function getFormattedDate(date) {
@@ -114,20 +114,20 @@ function getFormattedDate(date) {
 
 function getDateInfo({ date, type }) {
   const href =
-    type === "dining"
-      ? "https://disneyworld.disney.go.com/dining"
-      : "https://disneyworld.disney.go.com/fastpass-plus/select-party/";
+    type === 'dining'
+      ? 'https://disneyworld.disney.go.com/dining'
+      : 'https://disneyworld.disney.go.com/fastpass-plus/select-party/';
   if (moment().format() > date) {
     return (
       <>
-        You can{" "}
+        You can{' '}
         <Link target="_blank" color="secondary" href={href}>
           make these reservations today!
         </Link>
       </>
     )
   }
-  return `${getFormattedDate(date)} at ${getTime(date)}`;
+  return `${getFormattedDate(date)} at ${getTime(type)}`;
 }
 
 function isValidEmail(email) {
