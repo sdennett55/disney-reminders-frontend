@@ -103,7 +103,7 @@ function handleDateChange({
 }
 
 function getTime(type) {
-  return type === 'dining' ? '6:00am EST' : '7:00am EST';
+  return type === 'dining' ? '6:00am ET' : '7:00am ET';
 }
 
 function getFormattedDate(date) {
